@@ -6,7 +6,7 @@ let data = ["TEST", "string", "beans"];
 
 app.get('/', async function (req, res, next) {
   try {
-    return res.json({ data });
+    return res.json({data});
   } catch (err) {
     return next(err);
   };
