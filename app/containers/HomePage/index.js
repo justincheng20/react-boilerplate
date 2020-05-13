@@ -21,7 +21,7 @@ import {
   makeSelectItems,
   makeSelectData,
   makeSelectLoading,
-  makeSelectError,  
+  makeSelectError,
 } from 'containers/App/selectors';
 
 import messages from './messages';
@@ -29,13 +29,15 @@ import { loadItems } from '../App/actions';
 import reducer from './reducer';
 import saga from './saga';
 
+import ListItem from 'components/ListItem';
+
 const key = 'home';
 
 export function HomePage({
   loading,
   error,
   onLoad,
-  data
+  data,
 }) {
 
   useInjectReducer({ key, reducer });
@@ -43,23 +45,27 @@ export function HomePage({
 
   // Remove hook later; placeholder to get sense of how app works
   useEffect(() => {
-    console.log("on load")
     onLoad();
   }, []);
 
   const itemsListProps = {
     loading,
     error,
-  };  
+  };
 
-  console.log("This is data:",data);
+  console.log("This is data:", data);
+
+  if (!data.items.items) {
+    return "Loading"
+  }
 
   return (
     <div>
       <h1>
-        <FormattedMessage {...messages.header}/>
+        <FormattedMessage {...messages.header} />
       </h1>
-    </div>
+      <ListItem {...data.items.items}/>
+      </div>
   );
 }
 
@@ -77,7 +83,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export function mapDispatchToProps(dispatch) {
-  console.log('mapdispatchtoProps')
   return {
     onLoad: evt => dispatch(loadItems()),
   };

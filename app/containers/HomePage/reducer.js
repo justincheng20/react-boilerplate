@@ -17,7 +17,6 @@ export const initialState = {
 /* eslint-disable default-case, no-param-reassign */
 const homeReducer = (state = initialState, action) =>
   produce(state, draft => {
-    console.log("home reducer", action)
     switch (action.type) {
     }
   });
