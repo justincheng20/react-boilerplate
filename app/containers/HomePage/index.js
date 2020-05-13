@@ -19,6 +19,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 
 import {
   makeSelectItems,
+  makeSelectData,
   makeSelectLoading,
   makeSelectError,  
 } from 'containers/App/selectors';
@@ -33,7 +34,8 @@ const key = 'home';
 export function HomePage({
   loading,
   error,
-  onLoad
+  onLoad,
+  data
 }) {
 
   useInjectReducer({ key, reducer });
@@ -50,6 +52,8 @@ export function HomePage({
     error,
   };  
 
+  console.log("This is data:",data);
+
   return (
     <div>
       <h1>
@@ -62,11 +66,12 @@ export function HomePage({
 HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  items: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   onLoad: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
+  data: makeSelectData(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });
