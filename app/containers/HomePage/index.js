@@ -5,7 +5,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -15,10 +15,12 @@ import { createStructuredSelector } from 'reselect';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
+// import { DAEMON } from 'utils/constants';
+
 import {
   makeSelectItems,
   makeSelectLoading,
-  makeSelectError,
+  makeSelectError,  
 } from 'containers/App/selectors';
 
 import messages from './messages';
@@ -31,25 +33,27 @@ const key = 'home';
 export function HomePage({
   loading,
   error,
-  items,
   onLoad
 }) {
 
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
+  // Remove hook later; placeholder to get sense of how app works
+  useEffect(() => {
+    console.log("on load")
+    onLoad();
+  }, []);
+
   const itemsListProps = {
     loading,
     error,
-    items,
-  };
-
-  onLoad();
+  };  
 
   return (
     <div>
       <h1>
-        <FormattedMessage {...messages.header} />
+        <FormattedMessage {...messages.header}/>
       </h1>
     </div>
   );
@@ -63,7 +67,6 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  items: makeSelectItems(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });

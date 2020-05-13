@@ -8,20 +8,17 @@
  */
 
 import produce from 'immer';
-import { CHANGE_ITEMS } from './constants';
+
 
 // The initial state of the App
 export const initialState = {
-  items: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const homeReducer = (state = initialState, action) =>
   produce(state, draft => {
+    console.log("home reducer", action)
     switch (action.type) {
-      case CHANGE_ITEMS:
-        draft.data.items = action.data.items;
-        break;
     }
   });
 
