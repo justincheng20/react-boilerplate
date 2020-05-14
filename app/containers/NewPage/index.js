@@ -1,42 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
+import { Helmet } from 'react-helmet';
+
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
+import {
+  makeSelectRepos,
+  makeSelectLoading,
+  makeSelectError,
+} from 'containers/App/selectors';
+
+import { addItem } from '../App/actions';
+import { changeItemName } from './actions';
+import { makeSelectItemName } from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+
+const key = 'new';
 
 
-export default function NewPage({ item, onSubmitForm, onChangeItem }) {
+export function NewPage({ itemName, onSubmitForm, onChangeItemName }) {
+  console.log("itemName", itemName)
 
-  const [formData, setFormData] = useState({
-    item: "",
-  });
-
-
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    console.log("Check out state ->", formData);
-    // do something with the data submitted
-  };
-
-  const handleChange = evt => {
-    const { name, value } = evt.target;
-    setFormData(fData => ({
-      ...fData,
-      [name]: value
-    }));
-  };
+  useInjectReducer({ key, reducer });
+  useInjectSaga({ key, saga });
 
   return (
     <div>
       <h1>
         This is a test.
     </h1>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="item">Item:</label>
+    <form onSubmit={onSubmitForm}>
+      <label htmlFor="itemName">Item:</label>
       <input
-        id="item"
-        name="item"
-        value={formData.item}
-        onChange={handleChange}
+        id="itemName"
+        name="itemName"
+        value={itemName}
+        onChange={onChangeItemName}
       />
       <button>Add a new item!</button>
     </form>
@@ -46,6 +50,30 @@ export default function NewPage({ item, onSubmitForm, onChangeItem }) {
 
 NewPage.propTypes = {
   onSubmitForm: PropTypes.func,
-  item: PropTypes.string,
-  onChangeItem: PropTypes.func,
+  itemName: PropTypes.string,
+  onChangeItemName: PropTypes.func,
 };
+
+const mapStateToProps = createStructuredSelector({
+  itemName: makeSelectItemName(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onChangeItemName: evt => dispatch(changeItemName(evt.target.value)),
+    onSubmitForm: evt => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(addItem(itemName));
+    },
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(NewPage);
