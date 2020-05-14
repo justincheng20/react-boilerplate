@@ -64,6 +64,7 @@ export function HomePage({
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
+      <a href="/new">Add a new item</a>
       <ListItem {...data.items.items}/>
       </div>
   );

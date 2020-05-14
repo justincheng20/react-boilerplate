@@ -34,6 +34,7 @@ export function NewPage({ itemName, onSubmitForm, onChangeItemName }) {
       <h1>
         This is a test.
     </h1>
+    <a href="/">Link</a>
     <form onSubmit={onSubmitForm}>
       <label htmlFor="itemName">Item:</label>
       <input
