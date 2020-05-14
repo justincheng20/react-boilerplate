@@ -3,8 +3,10 @@ import { ADD_ITEM } from 'containers/App/constants';
 import { itemAdded, addItemError } from 'containers/App/actions';
 
 import request from 'utils/request';
+import { makeSelectItemName } from './selectors';
 
 export function* postItem() {
+  const itemName = yield select(makeSelectItemName());
   const requestURL = `http://localhost:3000/api`;
   try {
     // Call our request helper (see 'utils/request')
@@ -13,7 +15,7 @@ export function* postItem() {
     const postRequest = yield call(request, requestURL, {
       method: 'POST', headers: {
         'Content-Type': 'application/json'
-      }, body: JSON.stringify({name: 'adding'}),
+      }, body: JSON.stringify({name: itemName}),
     });
     const item = postRequest;
     console.log("item", item)
