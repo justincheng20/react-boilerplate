@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
@@ -20,12 +20,17 @@ import { makeSelectItemName } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import { push } from 'connected-react-router';
+import { Link } from 'react-router-dom';
+
+
+
 const key = 'new';
 
 
-export function NewPage({ itemName, onSubmitForm, onChangeItemName }) {
+export function NewPage({ itemName, onSubmitForm, onChangeItemName, push }) {
   console.log("itemName", itemName)
-
+  console.log("new page")
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -34,17 +39,21 @@ export function NewPage({ itemName, onSubmitForm, onChangeItemName }) {
       <h1>
         This is a test.
     </h1>
-    <a href="/">Link</a>
-    <form onSubmit={onSubmitForm}>
-      <label htmlFor="itemName">Item:</label>
-      <input
-        id="itemName"
-        name="itemName"
-        value={itemName}
-        onChange={onChangeItemName}
-      />
-      <button>Add a new item!</button>
-    </form>
+
+    <Link to="/">
+          Home
+        </Link>
+
+      <form onSubmit={onSubmitForm}>
+        <label htmlFor="itemName">Item:</label>
+        <input
+          id="itemName"
+          name="itemName"
+          value={itemName}
+          onChange={onChangeItemName}
+        />
+        <button>Add a new item!</button>
+      </form>
     </div>
   );
 }
