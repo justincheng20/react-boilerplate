@@ -18,7 +18,6 @@ export function* postItem() {
       }, body: JSON.stringify({name: itemName}),
     });
     const item = postRequest;
-    console.log("item", item)
     yield put(itemAdded(item));
   } catch (err) {
     yield put(addItemError(err));

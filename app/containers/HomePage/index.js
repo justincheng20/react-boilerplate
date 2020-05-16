@@ -52,11 +52,11 @@ export function HomePage({
 
   // Pass this into ListItem?
   const itemsListProps = {
+    data,
     loading,
     error,
   };
 
-  console.log("data", data)
   if (!data.items) {
     return "Loading"
   }
@@ -70,7 +70,7 @@ export function HomePage({
       <Link to="/new">
         Add a new item
         </Link>
-      <ListItem {...data} />
+      <ListItem {...itemsListProps} />
     </div>
   );
 }

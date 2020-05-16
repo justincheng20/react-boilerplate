@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ListItem(props) {
-  console.log("props",props)
+function ListItem({data, loading, error}) {
   return (
     <div>
       <ul>
-        {props.items.map(item => <li>{item}</li>)}
+        {data.items.map(item => <li>{item}</li>)}
       </ul>
     </div>
   );

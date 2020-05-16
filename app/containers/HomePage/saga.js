@@ -9,6 +9,7 @@ export function* getItems() {
   try {
     // Call our request helper (see 'utils/request')
     const resp = yield call(request, requestURL);
+    console.log("getItems")
     yield put(itemsLoaded(resp.data));
   } catch (err) {
     yield put(itemsLoadingError(err));

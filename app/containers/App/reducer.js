@@ -24,15 +24,15 @@ const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case LOAD_ITEMS:
-        console.log("LOAD items")
+        console.log("reducer, LOAD items")
         draft.loading = true;
         draft.error = false;
-        draft.data.items = false;
+        draft.data.items = [];
         break;
 
       case LOAD_ITEMS_SUCCESS:
-        console.log("load items success")
-        draft.data = action;
+        console.log("load items success", action.items)
+        draft.data = {items: action.items};
         draft.loading = false;
         break;
 
@@ -45,16 +45,17 @@ const appReducer = (state = initialState, action) =>
         console.log("ADD item")
         draft.loading = true;
         draft.error = false;
-        draft.data.items = false;
+        
         break;
 
       case ADD_ITEM_SUCCESS:
-        console.log("ADD item success")
-        draft.data.items = [action,...data.items];
+        console.log("ADD item success", action.item)
+        draft.data.items = action.item;
         draft.loading = false;
         break;
       
       case ADD_ITEM_ERROR:
+        console.log(action.error)
         draft.error = action.error;
         draft.loading = false;
         break;
