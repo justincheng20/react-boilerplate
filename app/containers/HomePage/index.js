@@ -58,7 +58,7 @@ export function HomePage({
   };
 
   if (!data.items) {
-    return "Loading"
+    return "Loading..."
   }
 
 

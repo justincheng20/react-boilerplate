@@ -8,11 +8,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import {
-  makeSelectRepos,
-  makeSelectLoading,
-  makeSelectError,
-} from 'containers/App/selectors';
+
 
 import { addItem } from '../App/actions';
 import { changeItemName } from './actions';
@@ -20,28 +16,28 @@ import { makeSelectItemName } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-import { push } from 'connected-react-router';
+
 import { Link } from 'react-router-dom';
+import { push } from 'connected-react-router';
 
 
 
 const key = 'new';
 
-
 export function NewPage({ itemName, onSubmitForm, onChangeItemName, push }) {
-  console.log("itemName", itemName)
-  console.log("new page")
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
+
+  
 
   return (
     <div>
       <h1>
-        This is a test.
+        Add a new item
     </h1>
 
-    <Link to="/">
-          Home
+      <Link to="/">
+        Home
         </Link>
 
       <form onSubmit={onSubmitForm}>
@@ -73,6 +69,7 @@ export function mapDispatchToProps(dispatch) {
     onChangeItemName: evt => dispatch(changeItemName(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(push('/'));
       dispatch(addItem(itemName));
     },
   };
