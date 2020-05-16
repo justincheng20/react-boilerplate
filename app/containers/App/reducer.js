@@ -32,7 +32,7 @@ const appReducer = (state = initialState, action) =>
 
       case LOAD_ITEMS_SUCCESS:
         console.log("load items success")
-        draft.data.items = action;
+        draft.data = action;
         draft.loading = false;
         break;
 

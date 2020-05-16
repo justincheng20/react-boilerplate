@@ -8,8 +8,8 @@ export function* getItems() {
   const requestURL = `http://localhost:3000/api`;
   try {
     // Call our request helper (see 'utils/request')
-    const items = yield call(request, requestURL);
-    yield put(itemsLoaded(items));
+    const resp = yield call(request, requestURL);
+    yield put(itemsLoaded(resp.data));
   } catch (err) {
     yield put(itemsLoadingError(err));
   }
@@ -19,7 +19,6 @@ export function* getItems() {
  * Root saga manages watcher lifecycle
  */
 export default function* itemsData() {
-  console.log("itemsData")
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution

@@ -5,7 +5,7 @@
  *
  */
 
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, componentDidMount } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -15,7 +15,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-// import { DAEMON } from 'utils/constants';
+
 
 import {
   makeSelectItems,
@@ -31,6 +31,8 @@ import saga from './saga';
 
 import ListItem from 'components/ListItem';
 
+import { Link } from 'react-router-dom';
+
 const key = 'home';
 
 export function HomePage({
@@ -43,30 +45,33 @@ export function HomePage({
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  // Remove hook later; placeholder to get sense of how app works
   useEffect(() => {
+    console.log("use effect")
     onLoad();
   }, []);
 
+  // Pass this into ListItem?
   const itemsListProps = {
     loading,
     error,
   };
 
-  console.log("This is data:", data);
-
-  if (!data.items.items) {
+  console.log("data", data)
+  if (!data.items) {
     return "Loading"
   }
+
 
   return (
     <div>
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
-      <a href="/new">Add a new item</a>
-      <ListItem {...data.items.items}/>
-      </div>
+      <Link to="/new">
+        Add a new item
+        </Link>
+      <ListItem {...data} />
+    </div>
   );
 }
 
@@ -85,7 +90,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoad: evt => dispatch(loadItems()),
+    onLoad: () => dispatch(loadItems()),
   };
 }
 
