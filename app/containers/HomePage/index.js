@@ -47,7 +47,7 @@ export function HomePage({
 
   useEffect(() => {
     console.log("use effect")
-    onLoad();
+    if (!data.items) onLoad();
   }, []);
 
   // Pass this into ListItem?
