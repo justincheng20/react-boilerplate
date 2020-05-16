@@ -49,8 +49,9 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case ADD_ITEM_SUCCESS:
-        console.log("ADD item success", action.item.data)
-        draft.data.items = action.item.data;
+        console.log("ADD item success", action.item, state.data.items)
+        draft.data.items = [action.item, ...state.data.items];
+        console.log(draft.data.items)
         draft.loading = false;
         break;
       
