@@ -31,7 +31,7 @@ function ItemList({ data, loading, error }) {
 }
 
 ItemList.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
