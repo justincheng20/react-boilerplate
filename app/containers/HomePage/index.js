@@ -48,12 +48,14 @@ export function HomePage({
 
   useEffect(() => {
     console.log("use effect")
-    if (data.items.length === 0) onLoad();
+    if (!data.items) onLoad();
   }, []);
 
   // Pass this into ListItem?
   const itemsListProps = {
     data,
+    loading,
+    error
   };
 
   if (loading) {
@@ -73,7 +75,7 @@ export function HomePage({
       <Link to="/new">
         Add a new item
         </Link>
-      <ItemList data={data} /> 
+      <ItemList {...itemsListProps} /> 
       </div>
   );
 }

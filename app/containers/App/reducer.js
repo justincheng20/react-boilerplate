@@ -22,7 +22,7 @@ export const initialState = {
   loading: true,
   error: false,
   data: {
-    items: [],
+    items: false,
   }
 };
 
@@ -38,6 +38,7 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case LOAD_ITEMS_SUCCESS:
+        console.log(action.items)
         draft.data = { items: action.items };
         draft.loading = false;
         break;

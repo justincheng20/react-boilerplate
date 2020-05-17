@@ -6,14 +6,24 @@ import StyledItemList from './StyledItemList';
 import Item from 'components/item';
 
 
-function ItemList({data}) {
-  console.log("itmelistdata", data)
+function ItemList({data, loading, error}) {
+  
+
+  if (loading){
+    console.log("items loading")
+    return "Loading"
+  }
+
+  if (error){
+    return "Something went wrong"
+  }
+
+  console.log("data thing", data)
   if (data.items.length === 0){
     return "Nothing added yet"
   }
 
-  else{
-  console.log("itemlist", data.items)
+  
 
 
   return (
@@ -25,7 +35,7 @@ function ItemList({data}) {
       </StyledItemList>
     </div>
   );
-  }
+  
 }
 
 ItemList.propTypes = {
