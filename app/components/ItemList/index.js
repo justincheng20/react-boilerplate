@@ -7,12 +7,14 @@ import Item from 'components/item';
 
 
 function ItemList({data}) {
-
-  if (!data.items){
+  console.log("itmelistdata", data)
+  if (data.items.length === 0){
     return "Nothing added yet"
   }
 
+  else{
   console.log("itemlist", data.items)
+
 
   return (
     <div>
@@ -23,7 +25,7 @@ function ItemList({data}) {
       </StyledItemList>
     </div>
   );
-
+  }
 }
 
 ItemList.propTypes = {

@@ -29,7 +29,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 // import ListItem from 'components/ListItem';
-import ItemList  from 'components/ItemList/index';
+import ItemList  from 'components/ItemList/';
 
 import { Link } from 'react-router-dom';
 
@@ -48,17 +48,16 @@ export function HomePage({
 
   useEffect(() => {
     console.log("use effect")
-    if (!data.items) onLoad();
+    if (data.items.length === 0) onLoad();
   }, []);
 
   // Pass this into ListItem?
   const itemsListProps = {
     data,
-    loading,
-    error,
   };
 
   if (loading) {
+    console.log("loading", loading)
     return "Loading..."
   }
 
@@ -74,12 +73,8 @@ export function HomePage({
       <Link to="/new">
         Add a new item
         </Link>
-      {
-         <ItemList {...itemsListProps} /> 
-          
-      }
-
-    </div>
+      <ItemList data={data} /> 
+      </div>
   );
 }
 

@@ -19,10 +19,10 @@ import {
 
 // The initial state of the App
 export const initialState = {
-  loading: false,
+  loading: true,
   error: false,
   data: {
-    items: false,
+    items: [],
   }
 };
 
@@ -31,9 +31,10 @@ const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case LOAD_ITEMS:
-        draft.loading = true;
+        console.log("load items")
+        // draft.loading = true;
         draft.error = false;
-        draft.data.items = [];
+        // draft.data.items = [];
         break;
 
       case LOAD_ITEMS_SUCCESS:
