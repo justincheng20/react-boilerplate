@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -16,19 +15,28 @@ import { makeSelectItemName } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import {
+  makeSelectLoading,
+  makeSelectError,
+} from 'containers/App/selectors';
+
 
 import { Link } from 'react-router-dom';
-import { push } from 'connected-react-router';
-
-
 
 const key = 'new';
 
-export function NewPage({ itemName, onSubmitForm, onChangeItemName, push }) {
+export function NewPage({ itemName, onSubmitForm, onChangeItemName, loading, error }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  
+  if (loading){
+    console.log("send")
+    return "Sending..."
+  }
+
+  if (error){
+    return "something went wrong"
+  }
 
   return (
     <div>
@@ -55,12 +63,16 @@ export function NewPage({ itemName, onSubmitForm, onChangeItemName, push }) {
 }
 
 NewPage.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
   itemName: PropTypes.string,
   onChangeItemName: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
   itemName: makeSelectItemName(),
 });
 
@@ -71,6 +83,7 @@ export function mapDispatchToProps(dispatch) {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       // dispatch(push('/'));
       dispatch(addItem(itemName));
+      // dispatch(changeItemName(""));
     },
   };
 }

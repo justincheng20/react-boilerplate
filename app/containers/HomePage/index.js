@@ -5,7 +5,7 @@
  *
  */
 
-import React, { useEffect, memo, componentDidMount } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -18,7 +18,6 @@ import { useInjectSaga } from 'utils/injectSaga';
 
 
 import {
-  makeSelectItems,
   makeSelectData,
   makeSelectLoading,
   makeSelectError,
@@ -29,9 +28,11 @@ import { loadItems } from '../App/actions';
 import reducer from './reducer';
 import saga from './saga';
 
-import ListItem from 'components/ListItem';
+// import ListItem from 'components/ListItem';
+import ItemList  from 'components/ItemList/index';
 
 import { Link } from 'react-router-dom';
+
 
 const key = 'home';
 
@@ -57,10 +58,13 @@ export function HomePage({
     error,
   };
 
-  if (!data.items) {
+  if (loading) {
     return "Loading..."
   }
 
+  if (error) {
+    return "Something went wrong."
+  }
 
   return (
     <div>
@@ -70,7 +74,11 @@ export function HomePage({
       <Link to="/new">
         Add a new item
         </Link>
-      <ListItem {...itemsListProps} />
+      {
+         <ItemList {...itemsListProps} /> 
+          
+      }
+
     </div>
   );
 }
