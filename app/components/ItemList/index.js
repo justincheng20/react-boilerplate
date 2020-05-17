@@ -1,45 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import uuid from 'react-uuid'
-
+import uuid from 'react-uuid';
+import Item from 'components/Item';
 import StyledItemList from './StyledItemList';
-import Item from 'components/item';
 
-
-function ItemList({data, loading, error}) {
-  
-
-  if (loading){
-    console.log("items loading")
-    return "Loading"
+function ItemList({ data, loading, error }) {
+  if (loading) {
+    return 'Loading';
   }
 
-  if (error){
-    return "Something went wrong"
+  if (error) {
+    return 'Something went wrong';
   }
 
-  console.log("data thing", data)
-  if (data.items.length === 0){
-    return "Nothing added yet"
+  if (data.items.length === 0) {
+    return 'Nothing added yet';
   }
-
-  
-
 
   return (
     <div>
       <StyledItemList>
-      <ul>
-        {data.items.map(item => <Item key={uuid()} item={item}></Item>)}
-      </ul>
+        <ul>
+          {data.items.map(item => (
+            <Item key={uuid()} item={item} />
+          ))}
+        </ul>
       </StyledItemList>
     </div>
   );
-  
 }
 
 ItemList.propTypes = {
-  itemName: PropTypes.array ,
+  data: PropTypes.array,
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 export default ItemList;

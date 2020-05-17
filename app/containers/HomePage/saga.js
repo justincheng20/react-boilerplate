@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOAD_ITEMS } from 'containers/App/constants';
 import { itemsLoaded, itemsLoadingError } from 'containers/App/actions';
 
@@ -9,7 +9,6 @@ export function* getItems() {
   try {
     // Call our request helper (see 'utils/request')
     const resp = yield call(request, requestURL);
-    console.log("getItems")
     yield put(itemsLoaded(resp.data));
   } catch (err) {
     yield put(itemsLoadingError(err));

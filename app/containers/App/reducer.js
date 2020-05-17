@@ -14,7 +14,7 @@ import {
   LOAD_ITEMS_ERROR,
   ADD_ITEM,
   ADD_ITEM_SUCCESS,
-  ADD_ITEM_ERROR
+  ADD_ITEM_ERROR,
 } from './constants';
 
 // The initial state of the App
@@ -23,7 +23,7 @@ export const initialState = {
   error: false,
   data: {
     items: false,
-  }
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -31,14 +31,10 @@ const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case LOAD_ITEMS:
-        console.log("load items")
-        // draft.loading = true;
         draft.error = false;
-        // draft.data.items = [];
         break;
 
       case LOAD_ITEMS_SUCCESS:
-        console.log(action.items)
         draft.data = { items: action.items };
         draft.loading = false;
         break;

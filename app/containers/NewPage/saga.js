@@ -3,29 +3,28 @@ import { ADD_ITEM } from 'containers/App/constants';
 import { itemAdded, addItemError } from 'containers/App/actions';
 
 import request from 'utils/request';
+import { push } from 'connected-react-router';
 import { makeSelectItemName } from './selectors';
-import { push } from 'connected-react-router'
 
 export function* postItem() {
   const itemName = yield select(makeSelectItemName());
   const requestURL = `http://localhost:3000/api`;
   try {
     // Call our request helper (see 'utils/request')
-    console.log("posting try")
     const postRequest = yield call(request, requestURL, {
-      method: 'POST', headers: {
-        'Content-Type': 'application/json'
-      }, body: JSON.stringify({item: itemName}),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ item: itemName }),
     });
-    const item = postRequest.item;
-    console.log("response", item)
+    const { item } = { ...postRequest };
     yield put(itemAdded(item));
-    yield put(push('/'))
+    yield put(push('/'));
   } catch (err) {
     yield put(addItemError(err));
   }
 }
-
 
 /**
  * Root saga manages watcher lifecycle

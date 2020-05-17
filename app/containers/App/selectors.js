@@ -24,7 +24,7 @@ const makeSelectError = () =>
 const makeSelectItems = () =>
   createSelector(
     selectGlobal,
-    globalState => globalState.data.items
+    globalState => globalState.data.items,
   );
 
 const makeSelectLocation = () =>
@@ -33,7 +33,7 @@ const makeSelectLocation = () =>
     routerState => routerState.location,
   );
 
-  const makeSelectData = () =>
+const makeSelectData = () =>
   createSelector(
     selectGlobal,
     globalState => globalState.data,

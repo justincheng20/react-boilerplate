@@ -15,7 +15,14 @@
  *    }
  */
 
-import { LOAD_ITEMS, LOAD_ITEMS_SUCCESS, LOAD_ITEMS_ERROR, ADD_ITEM, ADD_ITEM_SUCCESS, ADD_ITEM_ERROR } from './constants';
+import {
+  LOAD_ITEMS,
+  LOAD_ITEMS_SUCCESS,
+  LOAD_ITEMS_ERROR,
+  ADD_ITEM,
+  ADD_ITEM_SUCCESS,
+  ADD_ITEM_ERROR,
+} from './constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -23,7 +30,6 @@ import { LOAD_ITEMS, LOAD_ITEMS_SUCCESS, LOAD_ITEMS_ERROR, ADD_ITEM, ADD_ITEM_SU
  * @return {object} An action object with a type of LOAD_REPOS
  */
 export function loadItems() {
-  console.log("action: loadItems")
   return {
     type: LOAD_ITEMS,
   };
@@ -38,7 +44,6 @@ export function loadItems() {
  * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
  */
 export function itemsLoaded(items) {
-  console.log("action, itemsLoaded", items)
   return {
     type: LOAD_ITEMS_SUCCESS,
     items,
@@ -59,24 +64,23 @@ export function itemsLoadingError(error) {
   };
 }
 
-export function addItem(item){
+export function addItem(item) {
   return {
     type: ADD_ITEM,
-    item
+    item,
   };
 }
 
-export function itemAdded(item){
-  console.log("item added", item)
+export function itemAdded(item) {
   return {
     type: ADD_ITEM_SUCCESS,
-    item
+    item,
   };
 }
 
-export function addItemError(error){
+export function addItemError(error) {
   return {
     type: ADD_ITEM_ERROR,
     error,
-  }
+  };
 }

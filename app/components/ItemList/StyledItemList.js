@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import itemListStyles from './itemListStyles';
 
 const StyledItemList = styled.ul`
@@ -7,5 +6,3 @@ const StyledItemList = styled.ul`
 `;
 
 export default StyledItemList;
-
-

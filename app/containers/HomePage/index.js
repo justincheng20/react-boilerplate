@@ -13,58 +13,43 @@ import { compose } from 'redux';
 
 import { createStructuredSelector } from 'reselect';
 
-import { useInjectReducer } from 'utils/injectReducer';
+// import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-
 
 import {
   makeSelectData,
   makeSelectLoading,
   makeSelectError,
 } from 'containers/App/selectors';
+import ItemList from 'components/ItemList';
+import { Link } from 'react-router-dom';
 
 import messages from './messages';
 import { loadItems } from '../App/actions';
-import reducer from './reducer';
 import saga from './saga';
-
-// import ListItem from 'components/ListItem';
-import ItemList  from 'components/ItemList/';
-
-import { Link } from 'react-router-dom';
-
 
 const key = 'home';
 
-export function HomePage({
-  loading,
-  error,
-  onLoad,
-  data,
-}) {
-
-  useInjectReducer({ key, reducer });
+export function HomePage({ loading, error, onLoad, data }) {
+  // useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   useEffect(() => {
-    console.log("use effect")
     if (!data.items) onLoad();
   }, []);
 
-  // Pass this into ListItem?
   const itemsListProps = {
     data,
     loading,
-    error
+    error,
   };
 
   if (loading) {
-    console.log("loading", loading)
-    return "Loading..."
+    return 'Loading...';
   }
 
   if (error) {
-    return "Something went wrong."
+    return 'Something went wrong.';
   }
 
   return (
@@ -72,11 +57,9 @@ export function HomePage({
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
-      <Link to="/new">
-        Add a new item
-        </Link>
-      <ItemList {...itemsListProps} /> 
-      </div>
+      <Link to="/new"> Add a new item </Link>
+      <ItemList {...itemsListProps} />
+    </div>
   );
 }
 

@@ -20,7 +20,7 @@ const newReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CHANGE_ITEM_NAME:
-        draft.itemName= action.itemName;
+        draft.itemName = action.itemName;
         break;
     }
   });
