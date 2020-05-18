@@ -1,21 +1,10 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- */
-
 import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
 import { createStructuredSelector } from 'reselect';
-
-// import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-
 import {
   makeSelectData,
   makeSelectLoading,
@@ -23,7 +12,6 @@ import {
 } from 'containers/App/selectors';
 import ItemList from 'components/ItemList';
 import { Link } from 'react-router-dom';
-
 import messages from './messages';
 import { loadItems } from '../App/actions';
 import saga from './saga';
@@ -52,11 +40,13 @@ export function HomePage({ loading, error, onLoad, data }) {
   }
 
   return (
-    <div>
+    <div className="title">
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
-      <Link to="/new"> Add a new item </Link>
+      <Link className="button" to="/new">
+        Add a new item
+      </Link>
       <ItemList {...itemsListProps} />
     </div>
   );

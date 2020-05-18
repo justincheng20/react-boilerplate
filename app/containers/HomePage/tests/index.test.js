@@ -1,13 +1,8 @@
-/**
- * Test the HomePage
- */
-
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { browserHistory, BrowserRouter } from 'react-router-dom';
-
 import { HomePage, mapDispatchToProps } from '../index';
 import { loadItems } from '../../App/actions';
 import configureStore from '../../../configureStore';

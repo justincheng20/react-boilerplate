@@ -1,9 +1,14 @@
 import { css } from 'styled-components';
 
 const itemStyles = css`
-  font-weight: bold;
-  font-size: 16px;
-  border: 2px solid #41addd;
+  list-style-type: none;
+  font-size: 30px;
+  padding: 5px 10px;
+
+  &:hover {
+    font-weight: bold;
+    text-decoration: underline;
+  }
 `;
 
 export default itemStyles;

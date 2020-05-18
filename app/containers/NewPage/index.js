@@ -1,14 +1,11 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-
 import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import { addItem } from '../App/actions';
 import { makeSelectItemName } from './selectors';
@@ -37,18 +34,21 @@ export function NewPage({
   }
 
   return (
-    <div>
-      <h1>Add a new item</h1>
-      <Link to="/">Home</Link>
+    <div className="title">
+      <h1>Add a new item </h1>
+      <Link className="button" to="/">
+        Home
+      </Link>
       <form onSubmit={onSubmitForm}>
-        <label htmlFor="itemName">Item:</label>
+        <label htmlFor="itemName">Item: </label>
         <input
           id="itemName"
           name="itemName"
+          required
           value={itemName}
           onChange={onChangeItemName}
         />
-        <button type="submit">Add a new item!</button>
+        <button type="submit"> Add </button>
       </form>
     </div>
   );

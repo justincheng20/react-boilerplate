@@ -1,12 +1,3 @@
-/*
- * AppReducer
- *
- * The reducer takes care of our data. Using actions, we can
- * update our application state. To add a new action,
- * add it to the switch statement in the reducer function
- *
- */
-
 import produce from 'immer';
 import {
   LOAD_ITEMS_SUCCESS,
@@ -17,9 +8,8 @@ import {
   ADD_ITEM_ERROR,
 } from './constants';
 
-// The initial state of the App
 export const initialState = {
-  loading: true,
+  loading: false,
   error: false,
   data: {
     items: false,
@@ -47,11 +37,14 @@ const appReducer = (state = initialState, action) =>
       case ADD_ITEM:
         draft.loading = true;
         draft.error = false;
-
         break;
 
       case ADD_ITEM_SUCCESS:
-        draft.data.items = [action.item, ...state.data.items];
+        if (state.data.items) {
+          draft.data.items = [action.item, ...state.data.items];
+        } else {
+          draft.data.items = [action.item];
+        }
         draft.loading = false;
         break;
 

@@ -1,17 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
-<div>
+<div
+  class="title"
+>
   <h1>
     <span>
       List of Items
     </span>
   </h1>
   <a
+    class="button"
     href="/new"
   >
-     Add a new item 
+    Add a new item
   </a>
-  Nothing added yet
+  <div>
+    <ul
+      class="StyledItemList-xvt1sj-0 fXsYHv"
+    >
+      <ul>
+        <li
+          class="StyledItem-sc-1crlcl1-0 khrTxW"
+        >
+          <div>
+            "Nothing Added Yet"
+          </div>
+        </li>
+      </ul>
+    </ul>
+  </div>
 </div>
 `;

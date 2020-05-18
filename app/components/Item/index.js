@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import StyledItem from './StyledItem';
 
 function Item({ item }) {

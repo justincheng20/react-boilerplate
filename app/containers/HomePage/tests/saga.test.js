@@ -1,7 +1,3 @@
-/**
- * Tests for HomePage sagas
- */
-
 import { put, takeLatest } from 'redux-saga/effects';
 
 import { LOAD_ITEMS } from 'containers/App/constants';

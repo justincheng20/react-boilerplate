@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOAD_ITEMS } from 'containers/App/constants';
 import { itemsLoaded, itemsLoadingError } from 'containers/App/actions';
-
 import request from 'utils/request';
 
 export function* getItems() {

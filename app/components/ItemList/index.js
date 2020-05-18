@@ -6,24 +6,22 @@ import StyledItemList from './StyledItemList';
 
 function ItemList({ data, loading, error }) {
   if (loading || data.items === false) {
-    return 'Loading';
+    return <div>Loading</div>;
   }
 
   if (error) {
-    return 'Something went wrong';
-  }
-
-  if (data.items.length === 0) {
-    return 'Nothing added yet';
+    return <div>Something went wrong</div>;
   }
 
   return (
     <div>
       <StyledItemList>
         <ul>
-          {data.items.map(item => (
-            <Item key={uuid()} item={item} />
-          ))}
+          {data.items.length === 0 ? (
+            <Item key={uuid()} item='"Nothing Added Yet"' />
+          ) : (
+            data.items.map(item => <Item key={uuid()} item={item} />)
+          )}
         </ul>
       </StyledItemList>
     </div>

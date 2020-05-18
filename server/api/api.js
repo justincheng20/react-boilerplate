@@ -2,23 +2,25 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-let data = ["TEST", "string", "beans"];
+let data = [];
 
-app.get('/', async function (req, res, next) {
+app.get('/', async function(req, res, next) {
   try {
-    return res.json({data});
+    return res.status(200).json({ data });
   } catch (err) {
     return next(err);
-  };
+  }
 });
 
-app.post('/', async function (req, res, next) {
+app.post('/', async function(req, res, next) {
   try {
-    data = [req.body.name, ...data];
-    return res.json({data});
+    const { item } = { ...req.body };
+    if (item.trim().length === 0) throw new Error('error');
+    data = [item, ...data];
+    return res.status(201).json({ item });
   } catch (err) {
     return next(err);
-  };
+  }
 });
 
 module.exports = app;
