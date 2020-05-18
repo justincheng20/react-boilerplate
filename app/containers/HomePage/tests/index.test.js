@@ -34,6 +34,34 @@ describe('<HomePage />', () => {
     expect(firstChild).toMatchSnapshot();
   });
 
+  it('should fetch items on mount if data is false', () => {
+    const submitSpy = jest.fn();
+    render(
+      <Provider store={store}>
+        <IntlProvider locale="en">
+          <BrowserRouter>
+            <HomePage data={{ items: false }} onLoad={submitSpy} />
+          </BrowserRouter>
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(submitSpy).toHaveBeenCalled();
+  });
+
+  it('should not fetch items on mount if data is an array', () => {
+    const submitSpy = jest.fn();
+    render(
+      <Provider store={store}>
+        <IntlProvider locale="en">
+          <BrowserRouter>
+            <HomePage data={{ items: [] }} onLoad={submitSpy} />
+          </BrowserRouter>
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(submitSpy).not.toHaveBeenCalled();
+  });
+
   describe('mapDispatchToProps', () => {
     describe('onLoad', () => {
       it('should be injected', () => {

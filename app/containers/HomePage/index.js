@@ -31,7 +31,6 @@ import saga from './saga';
 const key = 'home';
 
 export function HomePage({ loading, error, onLoad, data }) {
-  // useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   useEffect(() => {

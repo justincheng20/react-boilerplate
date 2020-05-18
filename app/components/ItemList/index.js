@@ -5,7 +5,7 @@ import Item from 'components/Item';
 import StyledItemList from './StyledItemList';
 
 function ItemList({ data, loading, error }) {
-  if (loading) {
+  if (loading || data.items === false) {
     return 'Loading';
   }
 
